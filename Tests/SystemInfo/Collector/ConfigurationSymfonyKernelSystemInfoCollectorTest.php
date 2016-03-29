@@ -1,26 +1,26 @@
 <?php
 
 /**
- * File containing the SymfonySystemInfoCollectorTest class.
+ * File containing the ConfigurationSymfonyKernelSystemInfoCollectorTest class.
  *
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzSupportToolsBundle\Tests\SystemInfo\Collector;
 
-use EzSystems\EzSupportToolsBundle\SystemInfo\Collector\SymfonySystemInfoCollector;
-use EzSystems\EzSupportToolsBundle\SystemInfo\Value\SymfonySystemInfo;
+use EzSystems\EzSupportToolsBundle\SystemInfo\Collector\ConfigurationSymfonyKernelSystemInfoCollector;
+use EzSystems\EzSupportToolsBundle\SystemInfo\Value\SymfonyKernelSystemInfo;
 use PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpKernel\Kernel;
 
-class SymfonySystemInfoCollectorTest extends PHPUnit_Framework_TestCase
+class ConfigurationSymfonyKernelSystemInfoCollectorTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers \EzSystems\EzSupportToolsBundle\SystemInfo\Collector\SymfonySystemInfoCollector::collect()
+     * @covers \EzSystems\EzSupportToolsBundle\SystemInfo\Collector\ConfigurationSymfonyKernelSystemInfoCollector::collect()
      */
     public function testCollect()
     {
-        $expected = new SymfonySystemInfo([
+        $expected = new SymfonyKernelSystemInfo([
             'environment' => 'dev',
             'debugMode' => true,
             'version' => Kernel::VERSION,
@@ -39,7 +39,7 @@ class SymfonySystemInfoCollectorTest extends PHPUnit_Framework_TestCase
             'containterClass' => 'appProdDebugProjectContainer',
         ]);
 
-        $symfonyCollector = new SymfonySystemInfoCollector(
+        $symfonyCollector = new ConfigurationSymfonyKernelSystemInfoCollector(
             $expected->environment,
             $expected->debugMode,
             $expected->bundles,
@@ -53,7 +53,7 @@ class SymfonySystemInfoCollectorTest extends PHPUnit_Framework_TestCase
 
         $value = $symfonyCollector->collect();
 
-        self::assertInstanceOf('EzSystems\EzSupportToolsBundle\SystemInfo\Value\SymfonySystemInfo', $value);
+        self::assertInstanceOf('EzSystems\EzSupportToolsBundle\SystemInfo\Value\SymfonyKernelSystemInfo', $value);
 
         self::assertEquals($expected, $value);
     }

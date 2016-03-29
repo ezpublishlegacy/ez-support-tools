@@ -1,7 +1,7 @@
 <?php
 
 /**
- * File containing the SymfonySystemInfoCollector class.
+ * File containing the ConfigurationSymfonyKernelSystemInfoCollector class.
  *
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Kernel;
 /**
  * Collects information about the Symfony installation we are using.
  */
-class SymfonySystemInfoCollector implements SystemInfoCollector
+class ConfigurationSymfonyKernelSystemInfoCollector implements SystemInfoCollector
 {
     /**
      * Symfony environment.
@@ -107,13 +107,13 @@ class SymfonySystemInfoCollector implements SystemInfoCollector
     /**
      * Collects information about Symfony.
      *
-     * @return Value\SymfonySystemInfo
+     * @return Value\SymfonyKernelSystemInfo
      */
     public function collect()
     {
         ksort($this->bundles, SORT_FLAG_CASE | SORT_STRING);
 
-        return new Value\SymfonySystemInfo([
+        return new Value\SymfonyKernelSystemInfo([
             'environment' => $this->environment,
             'debugMode' => $this->debugMode,
             'version' => Kernel::VERSION,

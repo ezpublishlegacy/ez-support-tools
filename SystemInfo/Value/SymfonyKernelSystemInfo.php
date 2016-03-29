@@ -1,7 +1,7 @@
 <?php
 
 /**
- * File containing the SymfonySystemInfo class.
+ * File containing the SymfonyKernelSystemInfo class.
  *
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
@@ -13,7 +13,7 @@ use eZ\Publish\API\Repository\Values\ValueObject;
 /**
  * Value for information about the Symfony installation we are using.
  */
-class SymfonySystemInfo extends ValueObject implements SystemInfo
+class SymfonyKernelSystemInfo extends ValueObject implements SystemInfo
 {
     /**
      * Symfony environment.
