@@ -34,21 +34,52 @@ class ConfigurationSymfonyKernelSystemInfoCollectorTest extends PHPUnit_Framewor
             'rootDir' => '/srv/www/ezpublish-platform/app',
             'name' => 'app',
             'cacheDir' => '/srv/www/ezpublish-platform/app/cache/prod',
-            'logsDir' => '/srv/www/ezpublish-platform/app/logs',
+            'logDir' => '/srv/www/ezpublish-platform/app/logs',
             'charset' => 'UTF-8',
-            'containterClass' => 'appProdDebugProjectContainer',
         ]);
 
+        $kernelMock = $this->getMockBuilder('Symfony\Component\HttpKernel\Kernel')
+            ->setConstructorArgs([$expected->environment, $expected->debugMode])
+            ->getMock();
+
+        $kernelMock
+            ->expects($this->once())
+            ->method('getEnvironment')
+            ->will($this->returnValue($expected->environment));
+
+        $kernelMock
+            ->expects($this->once())
+            ->method('isDebug')
+            ->will($this->returnValue($expected->debugMode));
+
+        $kernelMock
+            ->expects($this->once())
+            ->method('getRootDir')
+            ->will($this->returnValue($expected->rootDir));
+
+        $kernelMock
+            ->expects($this->once())
+            ->method('getName')
+            ->will($this->returnValue($expected->name));
+
+        $kernelMock
+            ->expects($this->once())
+            ->method('getCacheDir')
+            ->will($this->returnValue($expected->cacheDir));
+
+        $kernelMock
+            ->expects($this->once())
+            ->method('getLogDir')
+            ->will($this->returnValue($expected->logDir));
+
+        $kernelMock
+            ->expects($this->once())
+            ->method('getCharset')
+            ->will($this->returnValue($expected->charset));
+
         $symfonyCollector = new ConfigurationSymfonyKernelSystemInfoCollector(
-            $expected->environment,
-            $expected->debugMode,
-            $expected->bundles,
-            $expected->rootDir,
-            $expected->name,
-            $expected->cacheDir,
-            $expected->logsDir,
-            $expected->charset,
-            $expected->containterClass
+            $kernelMock,
+            $expected->bundles
         );
 
         $value = $symfonyCollector->collect();

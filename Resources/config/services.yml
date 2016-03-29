@@ -36,12 +36,5 @@ services:
     support_tools.info_collectors.symfony.kernel.config:
         class: %support_tools.info_collectors.symfony.kernel.config.class%
         arguments:
-            - %kernel.environment%
-            - %kernel.debug%
+            - @kernel
             - %kernel.bundles%
-            - %kernel.root_dir%
-            - %kernel.name%
-            - %kernel.cache_dir%
-            - %kernel.logs_dir%
-            - %kernel.charset%
-            - %kernel.container_class%

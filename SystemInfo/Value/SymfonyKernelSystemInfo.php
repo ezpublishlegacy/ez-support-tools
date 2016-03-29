@@ -11,7 +11,7 @@ namespace EzSystems\EzSupportToolsBundle\SystemInfo\Value;
 use eZ\Publish\API\Repository\Values\ValueObject;
 
 /**
- * Value for information about the Symfony installation we are using.
+ * Value for information about the Symfony kernel we are using.
  */
 class SymfonyKernelSystemInfo extends ValueObject implements SystemInfo
 {
@@ -43,7 +43,7 @@ class SymfonyKernelSystemInfo extends ValueObject implements SystemInfo
     /**
      * Installed bundles.
      *
-     * A hash containing the active bundles (keys) and the corresponding namespaces.
+     * A hash containing the active bundles, where the key is the bundle name, and the value is the corresponding namespace.
      *
      * Example:
      * array (
@@ -89,7 +89,7 @@ class SymfonyKernelSystemInfo extends ValueObject implements SystemInfo
      *
      * @var string
      */
-    public $logsDir;
+    public $logDir;
 
     /**
      * Character set.
@@ -99,13 +99,4 @@ class SymfonyKernelSystemInfo extends ValueObject implements SystemInfo
      * @var string
      */
     public $charset;
-
-    /**
-     * Container class.
-     *
-     * Example: appProdDebugProjectContainer
-     *
-     * @var string
-     */
-    public $containterClass;
 }

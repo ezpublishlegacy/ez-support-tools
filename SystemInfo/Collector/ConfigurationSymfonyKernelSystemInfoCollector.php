@@ -12,100 +12,40 @@ use EzSystems\EzSupportToolsBundle\SystemInfo\Value;
 use Symfony\Component\HttpKernel\Kernel;
 
 /**
- * Collects information about the Symfony installation we are using.
+ * Collects information about the Symfony kernel we are using.
  */
 class ConfigurationSymfonyKernelSystemInfoCollector implements SystemInfoCollector
 {
     /**
-     * Symfony environment.
+     * Symfony kernel.
      *
-     * "dev" or "prod".
-     *
-     * @var string
+     * @var \Symfony\Component\HttpKernel\Kernel
      */
-    private $environment;
+    private $kernel;
 
     /**
-     * True if Symfony is in debug mode.
+     * Installed bundles.
      *
-     * @var bool
-     */
-    private $debugMode;
-
-    /**
-     * An array containing the active bundles (keys) and the corresponding namespace.
+     * A hash containing the active bundles, where the key is the bundle name, and the value is the corresponding namespace.
+     *
+     * Example:
+     * array (
+     *   'AppBundle' => 'AppBundle\\AppBundle',
+     *   'AsseticBundle' => 'Symfony\\Bundle\\AsseticBundle\\AsseticBundle',
+     * )
      *
      * @var array
      */
     private $bundles;
 
-    /**
-     * Root directory.
-     *
-     * @var string
-     */
-    private $rootDir;
-
-    /**
-     * Name.
-     *
-     * @var string
-     */
-    private $name;
-
-    /**
-     * Cache directory.
-     *
-     * @var string
-     */
-    private $cacheDir;
-
-    /**
-     * Log file directory.
-     *
-     * @var string
-     */
-    private $logsDir;
-
-    /**
-     * Character set.
-     *
-     * @var string
-     */
-    private $charset;
-
-    /**
-     * Container class.
-     *
-     * @var string
-     */
-    private $containterClass;
-
-    public function __construct(
-        $environment,
-        $debugMode,
-        array $bundles,
-        $rootDir,
-        $name,
-        $cacheDir,
-        $logsDir,
-        $charset,
-        $containterClass
-    )
+    public function __construct($kernel, $bundles)
     {
-        $this->environment = $environment;
-        $this->debugMode = $debugMode;
+        $this->kernel = $kernel;
         $this->bundles = $bundles;
-        $this->rootDir = $rootDir;
-        $this->name = $name;
-        $this->cacheDir = $cacheDir;
-        $this->logsDir = $logsDir;
-        $this->charset = $charset;
-        $this->containterClass = $containterClass;
     }
 
     /**
-     * Collects information about Symfony.
+     * Collects information about the Symfony kernel.
      *
      * @return Value\SymfonyKernelSystemInfo
      */
@@ -114,16 +54,15 @@ class ConfigurationSymfonyKernelSystemInfoCollector implements SystemInfoCollect
         ksort($this->bundles, SORT_FLAG_CASE | SORT_STRING);
 
         return new Value\SymfonyKernelSystemInfo([
-            'environment' => $this->environment,
-            'debugMode' => $this->debugMode,
+            'environment' => $this->kernel->getEnvironment(),
+            'debugMode' => $this->kernel->isDebug(),
             'version' => Kernel::VERSION,
             'bundles' => $this->bundles,
-            'rootDir' => $this->rootDir,
-            'name' => $this->name,
-            'cacheDir' => $this->cacheDir,
-            'logsDir' => $this->logsDir,
-            'charset' => $this->charset,
-            'containterClass' => $this->containterClass,
+            'rootDir' => $this->kernel->getRootDir(),
+            'name' => $this->kernel->getName(),
+            'cacheDir' => $this->kernel->getCacheDir(),
+            'logDir' => $this->kernel->getLogDir(),
+            'charset' => $this->kernel->getCharset(),
         ]);
     }
 }
