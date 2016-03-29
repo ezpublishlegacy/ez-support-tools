@@ -31,12 +31,24 @@ class SymfonySystemInfoCollectorTest extends PHPUnit_Framework_TestCase
                 'EzPublishCoreBundle' => 'eZ\\Bundle\\EzPublishCoreBundle\\EzPublishCoreBundle',
                 'EzSystemsEzSupportToolsBundle' => 'EzSystems\\EzSupportToolsBundle\\EzSystemsEzSupportToolsBundle',
             ],
+            'rootDir' => '/srv/www/ezpublish-platform/app',
+            'name' => 'app',
+            'cacheDir' => '/srv/www/ezpublish-platform/app/cache/prod',
+            'logsDir' => '/srv/www/ezpublish-platform/app/logs',
+            'charset' => 'UTF-8',
+            'containterClass' => 'appProdDebugProjectContainer',
         ]);
 
         $symfonyCollector = new SymfonySystemInfoCollector(
             $expected->environment,
             $expected->debugMode,
-            $expected->bundles
+            $expected->bundles,
+            $expected->rootDir,
+            $expected->name,
+            $expected->cacheDir,
+            $expected->logsDir,
+            $expected->charset,
+            $expected->containterClass
         );
 
         $value = $symfonyCollector->collect();

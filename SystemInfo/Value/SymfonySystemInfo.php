@@ -54,4 +54,58 @@ class SymfonySystemInfo extends ValueObject implements SystemInfo
      * @var array
      */
     public $bundles;
+
+    /**
+     * Root directory.
+     *
+     * Example: /srv/www/ezpublish-platform/app
+     *
+     * @var string
+     */
+    public $rootDir;
+
+    /**
+     * Name.
+     *
+     * Example: app
+     *
+     * @var string
+     */
+    public $name;
+
+    /**
+     * Cache directory.
+     *
+     * Example: /srv/www/ezpublish-platform/app/cache/prod
+     *
+     * @var string
+     */
+    public $cacheDir;
+
+    /**
+     * Log file directory.
+     *
+     * Example: /srv/www/ezpublish-platform/app/logs
+     *
+     * @var string
+     */
+    public $logsDir;
+
+    /**
+     * Character set.
+     *
+     * Example: UTF-8
+     *
+     * @var string
+     */
+    public $charset;
+
+    /**
+     * Container class.
+     *
+     * Example: appProdDebugProjectContainer
+     *
+     * @var string
+     */
+    public $containterClass;
 }

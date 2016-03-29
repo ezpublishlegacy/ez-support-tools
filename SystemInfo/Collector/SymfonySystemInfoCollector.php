@@ -39,11 +39,69 @@ class SymfonySystemInfoCollector implements SystemInfoCollector
      */
     private $bundles;
 
-    public function __construct($environment, $debugMode, array $bundles)
+    /**
+     * Root directory.
+     *
+     * @var string
+     */
+    private $rootDir;
+
+    /**
+     * Name.
+     *
+     * @var string
+     */
+    private $name;
+
+    /**
+     * Cache directory.
+     *
+     * @var string
+     */
+    private $cacheDir;
+
+    /**
+     * Log file directory.
+     *
+     * @var string
+     */
+    private $logsDir;
+
+    /**
+     * Character set.
+     *
+     * @var string
+     */
+    private $charset;
+
+    /**
+     * Container class.
+     *
+     * @var string
+     */
+    private $containterClass;
+
+    public function __construct(
+        $environment,
+        $debugMode,
+        array $bundles,
+        $rootDir,
+        $name,
+        $cacheDir,
+        $logsDir,
+        $charset,
+        $containterClass
+    )
     {
         $this->environment = $environment;
         $this->debugMode = $debugMode;
         $this->bundles = $bundles;
+        $this->rootDir = $rootDir;
+        $this->name = $name;
+        $this->cacheDir = $cacheDir;
+        $this->logsDir = $logsDir;
+        $this->charset = $charset;
+        $this->containterClass = $containterClass;
     }
 
     /**
@@ -60,6 +118,12 @@ class SymfonySystemInfoCollector implements SystemInfoCollector
             'debugMode' => $this->debugMode,
             'version' => Kernel::VERSION,
             'bundles' => $this->bundles,
+            'rootDir' => $this->rootDir,
+            'name' => $this->name,
+            'cacheDir' => $this->cacheDir,
+            'logsDir' => $this->logsDir,
+            'charset' => $this->charset,
+            'containterClass' => $this->containterClass,
         ]);
     }
 }
